@@ -3,7 +3,7 @@ function invite() {
 }
 
 function supportServer() {
-    window.location.href = 'https://discord.gg/tattoo';
+    window.location.href = 'https://discord.gg/YOUR_SUPPORT_SERVER';
 }
 
 // Example of setting server and user count dynamically
