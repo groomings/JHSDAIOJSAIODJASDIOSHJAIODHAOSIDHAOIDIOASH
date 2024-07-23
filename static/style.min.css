@@ -21,6 +21,7 @@ body {
     z-index: -1; /* Ensures the background is behind the content */
     background: url('https://i.sstatic.net/OFpcA.gif') no-repeat center center;
     background-size: cover; /* Ensures the background covers the entire area */
+    background-attachment: fixed; /* Keeps the background fixed during scrolling */
 }
 
 .name {
