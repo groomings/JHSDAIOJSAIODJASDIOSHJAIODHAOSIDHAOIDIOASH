@@ -12,6 +12,17 @@ body {
     overflow: hidden; /* To prevent scrollbars from appearing */
 }
 
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Ensures the background is behind the content */
+    background: url('https://i.sstatic.net/OFpcA.gif') no-repeat center center;
+    background-size: cover; /* Ensures the background covers the entire area */
+}
+
 .name {
     font-size: 3em;
     margin-bottom: 0.5em;
@@ -41,13 +52,4 @@ body {
 .buttons button:hover {
     background: rgba(255, 255, 255, 0.4);
     color: #000;
-}
-
-#background-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1; /* Ensures the canvas is behind the content */
 }
