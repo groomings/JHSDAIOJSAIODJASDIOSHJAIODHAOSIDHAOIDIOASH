@@ -1,17 +1,15 @@
 body {
-    margin: 0;
-    overflow: hidden; /* Prevent scrollbars from appearing */
-}
-
-#background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
+    background: black;
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     height: 100vh;
-    z-index: -1; /* Keeps the background behind the content */
-    background: url('https://i.sstatic.net/OFpcA.gif') no-repeat center center;
-    background-size: cover; /* Make sure the GIF covers the entire viewport */
+    margin: 0;
+    text-align: center;
+    overflow: hidden; /* To prevent scrollbars from appearing */
 }
 
 .name {
@@ -33,7 +31,7 @@ body {
     border: 2px solid #fff; /* White border */
     border-radius: 5px;
     color: #fff;
-    padding: 10px 20px; /* Adjust padding for button size */
+    padding: 10px 20px; /* Less padding to make buttons less long */
     margin: 5px;
     font-size: 1.2em;
     cursor: pointer;
@@ -43,4 +41,13 @@ body {
 .buttons button:hover {
     background: rgba(255, 255, 255, 0.4);
     color: #000;
+}
+
+#background-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Ensures the canvas is behind the content */
 }
