@@ -22,35 +22,5 @@ body {
     background: url('https://i.sstatic.net/OFpcA.gif') no-repeat center center;
     background-size: cover; /* Ensures the background covers the entire area */
     background-attachment: fixed; /* Keeps the background fixed during scrolling */
-}
-
-.name {
-    font-size: 3em;
-    margin-bottom: 0.5em;
-    color: #fff;
-    text-shadow: 0 0 10px #808080, 0 0 20px #808080, 0 0 30px #808080;
-}
-
-.desc {
-    font-size: 1.5em;
-    margin-bottom: 1.5em;
-    color: #fff;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-}
-
-.buttons button {
-    background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
-    border: 2px solid #fff; /* White border */
-    border-radius: 5px;
-    color: #fff;
-    padding: 10px 20px; /* Less padding to make buttons less long */
-    margin: 5px;
-    font-size: 1.2em;
-    cursor: pointer;
-    transition: background 0.3s ease, color 0.3s ease;
-}
-
-.buttons button:hover {
-    background: rgba(255, 255, 255, 0.4);
-    color: #000;
+    opacity: 0.8; /* Optional: Adjust opacity if needed */
 }
