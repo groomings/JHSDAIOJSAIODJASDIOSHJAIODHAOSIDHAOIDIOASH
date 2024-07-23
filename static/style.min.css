@@ -1,22 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./static/style.min.css">
-    <title>Humans</title>
-</head>
-<body>
-    <center>
-        <h1 class="name">Humans</h1>
-        <p class="desc">a utility discord bot that can be used anywhere!</p>
-        <section class="buttons">
-            <button onclick="invite()">Authorize</button>
-            <button onclick="supportServer()">Discord</button>
-        </section>
-    </center>
-    <script src="./static/buttons.js"></script>
-    <script src="./static/background.js"></script>
-</body>
-</html>
+body {
+    background: black;
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    text-align: center;
+    overflow: hidden; /* To prevent scrollbars from appearing */
+}
+
+.name {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+    color: #ccc;
+    text-shadow: 0 0 10px #808080, 0 0 20px #808080, 0 0 30px #808080;
+}
+
+.desc {
+    font-size: 1.5em;
+    margin-bottom: 1.5em;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.buttons button {
+    background: #fff;
+    border: none;
+    border-radius: 5px;
+    color: #000;
+    padding: 10px 30px;
+    margin: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.buttons button:hover {
+    background: #ddd;
+}
+
+#background-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Ensures the canvas is behind the content */
+}
