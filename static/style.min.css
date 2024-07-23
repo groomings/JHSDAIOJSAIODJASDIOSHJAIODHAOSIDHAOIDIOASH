@@ -3,13 +3,42 @@ body {
     font-family: 'Arial', sans-serif;
     color: #fff;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     height: 100vh;
     margin: 0;
     text-align: center;
     overflow: hidden; /* To prevent scrollbars from appearing */
+}
+
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+    color: #fff;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    overflow-y: auto; /* Allows scrolling if the list is too long */
+}
+
+#sidebar h2 {
+    margin-top: 0;
+}
+
+#sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.content {
+    margin-left: 270px; /* Adjust to prevent overlap with the sidebar */
+    padding: 20px;
+    width: calc(100% - 270px); /* Adjust the width to fit the content */
 }
 
 .name {
