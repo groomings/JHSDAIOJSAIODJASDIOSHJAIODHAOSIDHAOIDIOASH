@@ -5,7 +5,3 @@ function invite() {
 function supportServer() {
     window.location.href = 'https://discord.gg/YOUR_SUPPORT_SERVER';
 }
-
-// Example of setting server and user count dynamically
-document.getElementById('serverCount').innerText = '1234'; // Replace with dynamic data
-document.getElementById('usersCount').innerText = '56789'; // Replace with dynamic data
