@@ -1,5 +1,5 @@
 function invite() {
-    window.location.href = 'https://discord.com/oauth2/authorize?client_id=1262930991597621343&scope=bot&permissions=YOUR_PERMISSIONS';
+    window.location.href = 'https://discord.com/oauth2/authorize?client_id=1262930991597621343';
 }
 
 function supportServer() {
