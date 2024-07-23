@@ -8,15 +8,25 @@
     <title>Humans</title>
 </head>
 <body>
+    <div id="sidebar">
+        <h2>Bot Commands</h2>
+        <ul>
+            <li>!help - Displays all commands</li>
+            <li>!info - Provides bot info</li>
+            <!-- Add more commands here -->
+        </ul>
+    </div>
     <canvas id="background-canvas"></canvas>
-    <center>
-        <h1 class="name">Humans</h1>
-        <p class="desc">a utility discord bot that can be used anywhere!</p>
-        <section class="buttons">
-            <button onclick="invite()">Authorize</button>
-            <button onclick="supportServer()">Discord</button>
-        </section>
-    </center>
+    <div class="content">
+        <center>
+            <h1 class="name">Humans</h1>
+            <p class="desc">a utility discord bot that can be used anywhere!</p>
+            <section class="buttons">
+                <button onclick="invite()">Authorize</button>
+                <button onclick="supportServer()">Discord</button>
+            </section>
+        </center>
+    </div>
     <script src="./static/background.js"></script>
     <script src="./static/buttons.js"></script>
 </body>
