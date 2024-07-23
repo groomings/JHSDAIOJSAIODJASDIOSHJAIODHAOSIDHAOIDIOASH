@@ -3,15 +3,5 @@ function invite() {
 }
 
 function supportServer() {
-    window.location.href = 'https://discord.gg/aCqcxRBJ;
-}
-
-background.js:
-
-const canvas = document.getElementById('background-canvas');
-const ctx = canvas.getContext('2d');
-
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    window.location.href = 'https://discord.gg/aCqcxRBJ';
 }
