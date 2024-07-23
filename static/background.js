@@ -4,11 +4,13 @@ document.body.appendChild(canvas);
 
 const ctx = canvas.getContext('2d');
 
-let width = canvas.width = window.innerWidth * 2; // Increase the width
-let height = canvas.height = window.innerHeight * 2; // Increase the height
+// Set canvas size to cover a much larger area
+const scaleFactor = 3; // Increase the factor to make it larger
+let width = canvas.width = window.innerWidth * scaleFactor;
+let height = canvas.height = window.innerHeight * scaleFactor;
 
 const stars = [];
-const numStars = 2000; // Increase the number of stars
+const numStars = 5000; // Increase the number of stars for a more dense effect
 const speed = 0.02;
 
 for (let i = 0; i < numStars; i++) {
@@ -43,8 +45,8 @@ function drawStars() {
 }
 
 function resizeCanvas() {
-    width = canvas.width = window.innerWidth * 2;
-    height = canvas.height = window.innerHeight * 2;
+    width = canvas.width = window.innerWidth * scaleFactor;
+    height = canvas.height = window.innerHeight * scaleFactor;
 }
 
 window.addEventListener('resize', resizeCanvas);
