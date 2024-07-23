@@ -15,30 +15,32 @@ body {
 .name {
     font-size: 3em;
     margin-bottom: 0.5em;
-    color: #ccc;
+    color: #fff;
     text-shadow: 0 0 10px #808080, 0 0 20px #808080, 0 0 30px #808080;
 }
 
 .desc {
     font-size: 1.5em;
     margin-bottom: 1.5em;
+    color: #fff;
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
 .buttons button {
-    background: #fff;
-    border: none;
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+    border: 2px solid #fff; /* White border */
     border-radius: 5px;
-    color: #000;
-    padding: 10px 30px;
+    color: #fff;
+    padding: 10px 20px; /* Less padding to make buttons less long */
     margin: 5px;
     font-size: 1.2em;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 .buttons button:hover {
-    background: #ddd;
+    background: rgba(255, 255, 255, 0.4);
+    color: #000;
 }
 
 #background-canvas {
