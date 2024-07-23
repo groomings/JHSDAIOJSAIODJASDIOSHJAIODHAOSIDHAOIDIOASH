@@ -1,15 +1,6 @@
 body {
-    background: black;
-    font-family: 'Arial', sans-serif;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100vh;
     margin: 0;
-    text-align: center;
-    overflow: hidden; /* To prevent scrollbars from appearing */
+    overflow: hidden; /* Prevent scrollbars from appearing */
 }
 
 #background {
@@ -18,9 +9,38 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: -1; /* Ensures the background is behind the content */
+    z-index: -1; /* Keeps the background behind the content */
     background: url('https://i.sstatic.net/OFpcA.gif') no-repeat center center;
-    background-size: cover; /* Ensures the background covers the entire area */
-    background-attachment: fixed; /* Keeps the background fixed during scrolling */
-    opacity: 0.8; /* Optional: Adjust opacity if needed */
+    background-size: cover; /* Make sure the GIF covers the entire viewport */
+}
+
+.name {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+    color: #fff;
+    text-shadow: 0 0 10px #808080, 0 0 20px #808080, 0 0 30px #808080;
+}
+
+.desc {
+    font-size: 1.5em;
+    margin-bottom: 1.5em;
+    color: #fff;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.buttons button {
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+    border: 2px solid #fff; /* White border */
+    border-radius: 5px;
+    color: #fff;
+    padding: 10px 20px; /* Adjust padding for button size */
+    margin: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.buttons button:hover {
+    background: rgba(255, 255, 255, 0.4);
+    color: #000;
 }
