@@ -2,22 +2,480 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./static/style.min.css">
-    <title>Humans</title>
+    <title>Versatile biolink</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html {
+            font-family: 'VT323', monospace;
+            background-color: #000;
+            color: #fff;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            padding: 2rem;
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 2px solid #fff;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            overflow: hidden;
+        }
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.1) rotate(5deg);
+            filter: invert(1);
+        }
+
+        h1 {
+            font-size: 3em;
+            margin: 0.5rem 0;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        h2 {
+            font-size: 1.5em;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+
+        #terminal {
+            position: relative;
+        }
+
+        #command-line {
+            display: flex;
+            align-items: center;
+        }
+
+        #command-prompt {
+            margin-right: 5px;
+        }
+
+        #command-input {
+            background-color: transparent;
+            border: none;
+            color: #fff;
+            font-family: 'VT323', monospace;
+            font-size: 1.2em;
+            width: calc(100% - 20px);
+            padding: 5px;
+            outline: none;
+        }
+
+        #cursor {
+            position: absolute;
+            width: 10px;
+            height: 20px;
+            background-color: #fff;
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        #output {
+            margin-top: 20px;
+            white-space: pre-wrap;
+        }
+
+        .binary-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+            overflow: hidden;
+        }
+
+        .binary-line {
+            position: absolute;
+            top: -100px;
+            color: #fff;
+            font-size: 14px;
+            white-space: nowrap;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        .glitch {
+            position: relative;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            left: 2px;
+            text-shadow: -1px 0 #fff;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        .glitch::after {
+            left: -2px;
+            text-shadow: -1px 0 #fff;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% {
+                clip: rect(10px, 9999px, 31px, 0);
+            }
+            5% {
+                clip: rect(99px, 9999px, 94px, 0);
+            }
+            10% {
+                clip: rect(45px, 9999px, 70px, 0);
+            }
+            15% {
+                clip: rect(86px, 9999px, 90px, 0);
+            }
+            20% {
+                clip: rect(24px, 9999px, 16px, 0);
+            }
+            25% {
+                clip: rect(67px, 9999px, 92px, 0);
+            }
+            30% {
+                clip: rect(54px, 9999px, 27px, 0);
+            }
+            35% {
+                clip: rect(63px, 9999px, 16px, 0);
+            }
+            40% {
+                clip: rect(10px, 9999px, 86px, 0);
+            }
+            45% {
+                clip: rect(1px, 9999px, 91px, 0);
+            }
+            50% {
+                clip: rect(1px, 9999px, 66px, 0);
+            }
+            55% {
+                clip: rect(60px, 9999px, 70px, 0);
+            }
+            60% {
+                clip: rect(42px, 9999px, 22px, 0);
+            }
+            65% {
+                clip: rect(61px, 9999px, 59px, 0);
+            }
+            70% {
+                clip: rect(42px, 9999px, 2px, 0);
+            }
+            75% {
+                clip: rect(56px, 9999px, 36px, 0);
+            }
+            80% {
+                clip: rect(85px, 9999px, 6px, 0);
+            }
+            85% {
+                clip: rect(57px, 9999px, 65px, 0);
+            }
+            90% {
+                clip: rect(23px, 9999px, 84px, 0);
+            }
+            95% {
+                clip: rect(33px, 9999px, 91px, 0);
+            }
+            100% {
+                clip: rect(40px, 9999px, 18px, 0);
+            }
+        }
+
+        .typing {
+            overflow: hidden;
+            border-right: 0.15em solid #fff;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 0.15em;
+            animation: typing 3.5s steps(30, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #fff }
+        }
+
+        /* Command Prompt Styles */
+        .cmd-icon {
+            width: 64px;
+            height: 64px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .cmd-window {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+            height: 400px;
+            background-color: #000;
+            border: 2px solid #fff;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            z-index: 1000;
+        }
+
+        .cmd-title-bar {
+            background-color: #0078d7;
+            color: #fff;
+            padding: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cmd-title {
+            font-size: 14px;
+        }
+
+        .cmd-close {
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .cmd-content {
+            padding: 10px;
+            height: calc(100% - 30px);
+            overflow-y: auto;
+        }
+
+        .cmd-input {
+            width: 100%;
+            background-color: transparent;
+            border: none;
+            color: #fff;
+            font-family: 'Consolas', monospace;
+            font-size: 14px;
+            outline: none;
+        }
+    </style>
 </head>
 <body>
-    <canvas id="background-canvas"></canvas>
-    <center>
-        <h1 class="name">Humans</h1>
-        <p class="desc">A versatile tool designed for seamless functionality within your direct messages.</p>
-        <section class="buttons">
-            <button onclick="invite()">Authorize</button>
-            <button onclick="supportServer()">Discord</button>
-        </section>
-    </center>
-    <script src="./static/background.js"></script>
-    <script src="./static/buttons.js"></script>
+    <div class="container">
+        <div class="binary-bg" id="binary-bg"></div>
+        <div class="profile-section">
+            <img src="https://cdn.discordapp.com/avatars/1208342965676937236/631c1e45bb5d9634c5672a5e357e1488.webp?size=100" alt="Versatile Profile" class="profile-pic">
+            <h1 class="glitch" data-text="Versatile">Versatile</h1>
+            <h2 class="typing">@54s</h2>
+        </div>
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFOklEQVR4nO2aa0xTZxjHz6R+mGMzWbbFZYsuy+IydfFDjJcYL5mXOOMyY7bFGaeZl8Rl7Ks6IyoXQUWrIFIugoCAiKKoKAVELl6mgFyEiqUUpKUXSktboLS0PTvPIW3Z6OlpOTlU0vP8k+bk7X3P+//1fd73ec9BqU9ZONhiMEP0IxgMFoiC6S8Gg0GYUgKQsFQKloMwGCCY1ASoWB5CYpgcAXifBDDZAhCShixhhBBkq5/GdRgMBkGWEbQcbEEIjFSAXQjhkRbALgTBHwAGEYTBYAlCMMwQBGEI/CGAwRSEwNj7MAIgNyJgOfjRAoTBIIDBAD5aAMNgMAQwGCFajghgMMIRh4VgFcJghGEpWIdtE4AQrEUI/GEIQehXEQYjDpYhBKGPRgDDwQZhGUSBgBCuD6GweqwCLEYItt8jIAjCAliHEAjGIMBiJLxdQw4CCMMyhMD6MQqwECFYMS4BOFiHENiMMDxjGAyGwWBp1v+E1QBWIATXx1oFDAgAwzKEwGZTCzBXANUJCwQMMMvUAsx1QJvkiNYUAdb8l2dQzBQHtMmFHhgDwNwOqJk67pOZIgAWYEVAAOb2gPIPawXAQqxCCGyZcoB5KqANrgx1RJvMMAG4EUcQtlX/IcCRMCKOCrCEEQcKKGzXa0JWtZZ0/EGGwrAcwBgEhkF46Jg0ZHmrZ88GCsVxrH0JQ8F0UEBhk04dtNLr+OMKdROwGosQAtuGCaBRqw7W2A7+Tr9O+Wd8xzUhK7WUUAcFGHaDFZQMGSqAWqU6QMKp6hkOUCWUKLnjfhFHhFVCmaSLElGTH3B9sDgABiEELvdbVLqTotBcV0OFusrLQVUz/NRLOR/uFn4zN0+eX3KV21KdzGpjRIqoK1l1Iu6lIb8/UFDC4G1Ig4UrME0AsFK9l1ugjIWXhQLF+fSGyuTonDc9vW++Upt9srFNkPM2v6mYbyrgtGjTOBCRLQLvvMbq9j+9LGx5EiWiujgV6i4OhS1X0Kx6hG6aNgAWYhHpAhhyLapMTcavRr2yYUNqZcyKpIqo+XFv/vx9UW2OW0Hrm4dVMt5dHSXt0FIiM7k3kC+Hhz3H0iEioKG4aXE5OuFz4VfJmwUpD7ObtNk3+C3lTAGjKvQ1Gq7f8OyCDY/MmQJIB8BCrEQIWKTBoFNRwuu9CtUdLaXQGPSaDoW6S6DVKw06Sq7WUmLQUCJ4ze2uiH0l+HLzs+z6jEdvxaUc+vO3eU/zTucLmm6XsVV8Oj8jQ9mJnQUgBJsGBVCRwrDQAmFn/E7ey3mHBJ8tSKoIW5Re9+eyxIqIRckV0V6ptRG+6bXhAdm8+A15rZn7RbKGOLqQzWZzmJyQKlXXlxw6G5/V/V5dR8cXS5kGwBKsGMwBGOAGIUH7PGrZjkP8/P0VbdczZfJGLk3RrhJrFT16nQb01IhBaaAlgwLAoNMCSNvOGQ06rUZDSWRKddejLqX6nY5SiLoUyg5OuyIlgd+W9meuMLd4jj2/VtHYQqnpEUm1gMAMVPVRZ6FdATDEFwRHpcn7Y/Lb+YklsopEtqKRLe6W8noUnVJa1asgH7WUUKeldAqNDnuJdRKTtEc2KIC82yvWdH/7hC3dGFMtvHisRvIys1nOe9qm6OD2aGnlsHQeUgAM6YTlYFlWrWz7uQphWY5QHlclVqZxFN2FYko5uH/XaAGm/SXo6gL8Wf9wZj0rrZqTW8LNKm7qyC4R0XNKRVQRm8+s4oiYDSyeuLOsmhJZzDVXvLIqoV9yBWGnAeYOZ/zPlU8R+v8t/wJhLI1QKOijrAAAAABJRU5ErkJggg==" alt="Command Prompt" class="cmd-icon" id="cmd-icon">
+        <div id="terminal">
+            <p>Welcome to Versatile's Terminal. Type 'help' for available commands.</p>
+            <div id="command-line">
+                <span id="command-prompt">$</span>
+                <input type="text" id="command-input" autofocus>
+                <span id="cursor"></span>
+            </div>
+        </div>
+        <div id="output"></div>
+    </div>
+
+    <div class="cmd-window" id="cmd-window">
+        <div class="cmd-title-bar">
+            <span class="cmd-title">Command Prompt</span>
+            <span class="cmd-close" id="cmd-close">&times;</span>
+        </div>
+        <div class="cmd-content">
+            <div id="cmd-output">Microsoft Windows [Version 10.0.19042.1706]<br>(c) Microsoft Corporation. All rights reserved.<br><br>C:\Users\Versatile&gt;</div>
+            <input type="text" id="cmd-input" class="cmd-input" autofocus>
+        </div>
+    </div>
+
+    <script>
+        const links = {
+            sadist: "https://sadist.lol",
+            instagram: "https://instagram.com/savlolxd",
+            discord: "https://discord.com/users/1208342965676937236",
+            telegram: "https://t.me/LRx3isgJn",
+            roblox: "https://roblox.com/users/4797272273/profile"
+        };
+
+        const commandInput = document.getElementById('command-input');
+        const output = document.getElementById('output');
+        const cursor = document.getElementById('cursor');
+
+        commandInput.addEventListener('input', updateCursorPosition);
+        commandInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                const command = this.value.toLowerCase();
+                this.value = '';
+                executeCommand(command);
+                updateCursorPosition();
+            }
+        });
+
+        function updateCursorPosition() {
+            const inputRect = commandInput.getBoundingClientRect();
+            const inputStyle = window.getComputedStyle(commandInput);
+            const inputText = commandInput.value;
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            context.font = inputStyle.font;
+            const textWidth = context.measureText(inputText).width;
+            cursor.style.left = `${inputRect.left + textWidth + 5}px`;
+            cursor.style.top = `${inputRect.top}px`;
+        }
+
+        function executeCommand(command) {
+            output.innerHTML += `$ ${command}\n`;
+            
+            if (command === 'help') {
+                output.innerHTML += 'Available commands:\n';
+                output.innerHTML += 'open [link] - Open a specific link. Available links:\n';
+                for (const link of Object.keys(links)) {
+                    output.innerHTML += `  - ${link}\n`;
+                }
+                output.innerHTML += 'clear - Clear the terminal\n';
+                output.innerHTML += 'and now - Display the current date and time\n';
+                output.innerHTML += 'matrix - Toggle the Matrix effect\n';
+            } else if (command.startsWith('open ')) {
+                const link = command.split(' ')[1];
+                if (links[link]) {
+                    window.open(links[link], '_blank');
+                    output.innerHTML += `Initiating connection to ${link}...\n`;
+                    setTimeout(() => {
+                        output.innerHTML += `Connection established. Redirecting...\n`;
+                    }, 1000);
+                } else {
+                    output.innerHTML += `Error: Link "${link}" not found in database. Type 'help' to see available links.\n`;
+                }
+            } else if (command === 'clear') {
+                output.innerHTML = '';
+            } else if (command === 'and now') {
+                const now = new Date();
+                output.innerHTML += `Current system time: ${now.toLocaleString()}\n`;
+            } else if (command === 'matrix') {
+                toggleMatrixEffect();
+            } else {
+                output.innerHTML += `Command not recognized: ${command}\n`;
+                output.innerHTML += `Type 'help' to see available commands.\n`;
+            }
+
+            output.innerHTML += '\n';
+            output.scrollTop = output.scrollHeight;
+        }
+
+        function createBinaryLine() {
+            const line = document.createElement('div');
+            line.classList.add('binary-line');
+            line.style.left = `${Math.random() * 100}%`;
+            line.style.animationDuration = `${Math.random() * 5 + 5}s`;
+            line.textContent = generateBinaryString(50);
+            document.getElementById('binary-bg').appendChild(line);
+
+            line.addEventListener('animationend', () => {
+                line.remove();
+            });
+        }
+
+        function generateBinaryString(length) {
+            const patterns = ['10', '10', '10', '10', '1001010', '100101'];
+            let result = '';
+            while (result.length < length) {
+                result += patterns[Math.floor(Math.random() * patterns.length)];
+            }
+            return result.slice(0, length);
+        }
+
+        setInterval(createBinaryLine, 100);
+
+        let matrixEffect = true;
+        function toggleMatrixEffect() {
+            matrixEffect = !matrixEffect;
+            document.getElementById('binary-bg').style.display = matrixEffect ? 'block' : 'none';
+            output.innerHTML += `Matrix effect ${matrixEffect ? 'enabled' : 'disabled'}.\n`;
+        }
+
+        // Initial cursor position
+        updateCursorPosition();
+
+        // Command Prompt functionality
+        const cmdIcon = document.getElementById('cmd-icon');
+        const cmdWindow = document.getElementById('cmd-window');
+        const cmdClose = document.getElementById('cmd-close');
+        const cmdInput = document.getElementById('cmd-input');
+        const cmdOutput = document.getElementById('cmd-output');
+
+        cmdIcon.addEventListener('click', () => {
+            cmdWindow.style.display = 'block';
+            cmdInput.focus();
+        });
+
+        cmdClose.addEventListener('click', () => {
+            cmdWindow.style.display = 'none';
+        });
+
+        cmdInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                const command = cmdInput.value;
+                cmdOutput.innerHTML += `C:\\Users\\Versatile>${command}<br>`;
+                cmdInput.value = '';
+                
+                // Add your command processing logic here
+                if (command.toLowerCase() === 'exit') {
+                    cmdWindow.style.display = 'none';
+                } else {
+                    cmdOutput.innerHTML += `'${command}' is not recognized as an internal or external command, operable program or batch file.<br>`;
+                }
+                
+                cmdOutput.innerHTML += '<br>C:\\Users\\Versatile>';
+                cmdOutput.scrollTop = cmdOutput.scrollHeight;
+            }
+        });
+    </script>
 </body>
 </html>
