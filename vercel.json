@@ -6,3 +6,11 @@
     }
   ]
 }
+{
+  "routes": [
+    {
+      "src": "/versatile",
+      "dest": "/versatile.html"
+    }
+  ]
+}
