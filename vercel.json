@@ -3,6 +3,18 @@
     {
       "src": "/versatile",
       "dest": "/versatile.html"
+    },
+    {
+      "src": "/fault",
+      "dest": "/fault.html"
+    },
+    {
+      "src": "/",
+      "dest": "/"
+    },
+    {
+      "src": "",
+      "dest": ""
     }
   ]
 }
