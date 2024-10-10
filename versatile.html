@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Versatile</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html {
+            font-family: 'VT323', monospace;
+            background-color: #000;
+            color: #fff;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            padding: 2rem;
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 2px solid #fff;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            transition: transform 0.3s ease, filter 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.1) rotate(5deg);
+            filter: invert(1);
+        }
+
+        h1 {
+            font-size: 3em;
+            margin: 0.5rem 0;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        h2 {
+            font-size: 1.5em;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+
+        .dev-badge {
+            display: inline-block;
+            background-color: #5865F2;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            margin-top: 10px;
+        }
+
+        #terminal {
+            position: relative;
+            margin-top: 20px;
+        }
+
+        #command-line {
+            display: flex;
+            align-items: center;
+        }
+
+        #command-prompt {
+            margin-right: 5px;
+        }
+
+        #command-input {
+            background-color: transparent;
+            border: none;
+            color: #fff;
+            font-family: 'VT323', monospace;
+            font-size: 1.2em;
+            width: calc(100% - 20px);
+            padding: 5px;
+            outline: none;
+        }
+
+        #cursor {
+            position: absolute;
+            width: 10px;
+            height: 20px;
+            background-color: #fff;
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        #output {
+            margin-top: 20px;
+            white-space: pre-wrap;
+        }
+
+        /* Background Snowflakes */
+        .snow-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .snowflake-bg {
+            position: absolute;
+            color: #fff;
+            font-size: 20px;
+            opacity: 0;
+            transition: opacity 0.5s;
+            animation: snowfallBg linear infinite;
+        }
+
+        @keyframes snowfallBg {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Cursor Trail Snowflakes */
+        .snowflake-trail {
+            position: absolute;
+            color: #fff;
+            font-size: 16px;
+            opacity: 1;
+            pointer-events: none;
+            animation: dropTrail 2s forwards;
+            z-index: 2;
+        }
+
+        @keyframes dropTrail {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Snowfall Background -->
+    <div class="snow-bg" id="snow-bg"></div>
+
+    <div class="container">
+        <div class="profile-section">
+            <img src="https://i.pinimg.com/736x/1d/2b/49/1d2b49fac751e12d5077ab8a1c9e0561.jpg" alt="Versatile Profile" class="profile-pic">
+            <h1>Versatile</h1>
+            <h2>@54s</h2>
+            <div class="dev-badge">Developer</div>
+        </div>
+        <div id="terminal">
+            <p>Welcome to Versatile's Terminal. Type 'help' for available commands.</p>
+            <div id="command-line">
+                <span id="command-prompt">$</span>
+                <input type="text" id="command-input" autofocus>
+                <span id="cursor"></span>
+            </div>
+        </div>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        const links = {
+            sadist: "https://sadist.lol",
+            instagram: "https://instagram.com/savlolxd",
+            discord: "https://discord.com/users/1208342965676937236",
+            telegram: "https://t.me/LRx3isgJn",
+            roblox: "https://roblox.com/users/4797272273/profile"
+        };
+
+        const commandInput = document.getElementById('command-input');
+        const output = document.getElementById('output');
+        const cursor = document.getElementById('cursor');
+
+        commandInput.addEventListener('input', updateCursorPosition);
+        commandInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                const command = this.value.toLowerCase();
+                this.value = '';
+                executeCommand(command);
+                updateCursorPosition();
+            }
+        });
+
+        function updateCursorPosition() {
+            const inputRect = commandInput.getBoundingClientRect();
+            const inputStyle = window.getComputedStyle(commandInput);
+            const inputText = commandInput.value;
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            context.font = inputStyle.font;
+            const textWidth = context.measureText(inputText).width;
+            cursor.style.left = `${inputRect.left + textWidth + 5}px`;
+            cursor.style.top = `${inputRect.top}px`;
+            createSnowflakeTrail(cursor.offsetLeft, cursor.offsetTop);
+        }
+
+        function executeCommand(command) {
+            output.innerHTML += `$ ${command}\n`;
+            
+            if (command === 'help') {
+                output.innerHTML += 'Available commands:\n';
+                output.innerHTML += 'open [link] - Open a specific link. Available links:\n';
+                for (const link of Object.keys(links)) {
+                    output.innerHTML += `  - ${link}\n`;
+                }
+                output.innerHTML += 'clear - Clear the terminal\n';
+                output.innerHTML += 'and now - Display the current date and time\n';
+            } else if (command.startsWith('open ')) {
+                const link = command.split(' ')[1];
+                if (links[link]) {
+                    window.open(links[link], '_blank');
+                    output.innerHTML += `Initiating connection to ${link}...\n`;
+                    setTimeout(() => {
+                        output.innerHTML += `Connection established. Redirecting...\n`;
+                    }, 1000);
+                } else {
+                    output.innerHTML += `Error: Link "${link}" not found in database. Type 'help' to see available links.\n`;
+                }
+            } else if (command === 'clear') {
+                output.innerHTML = '';
+            } else if (command === 'and now') {
+                const now = new Date();
+                output.innerHTML += `Current system time: ${now.toLocaleString()}\n`;
+            } else {
+                output.innerHTML += `Command not recognized: ${command}\n`;
+                output.innerHTML += `Type 'help' to see available commands.\n`;
+            }
+
+            output.innerHTML += '\n';
+            output.scrollTop = output.scrollHeight;
+        }
+
+        // Function to create background snowflakes
+        function createSnowBackground() {
+            const snowBg = document.getElementById('snow-bg');
+            const numberOfSnowflakes = 50;
+
+            for (let i = 0; i < numberOfSnowflakes; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.innerHTML = '❄';
+                snowflake.className = 'snowflake-bg';
+                snowflake.style.left = `${Math.random() * 100}vw`;
+                snowflake.style.fontSize = `${Math.random() * 10 + 10}px`;
+                snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                snowflake.style.opacity = Math.random();
+                snowflake.style.transform = `translateY(-${Math.random() * 100}px)`;
+                snowBg.appendChild(snowflake);
+            }
+        }
+
+        // Function to create snowflakes following the cursor
+        function createSnowflakeTrail(x, y) {
+            const snowflake = document.createElement('div');
+            snowflake.innerHTML = '❄';
+            snowflake.className = 'snowflake-trail';
+            snowflake.style.left = `${x}px`;
+            snowflake.style.top = `${y}px`;
+            snowflake.style.fontSize = `${Math.random() * 8 + 8}px`;
+            snowflake.style.opacity = 1;
+            document.body.appendChild(snowflake);
+
+            // Remove the snowflake after the animation completes
+            snowflake.addEventListener('animationend', () => {
+                snowflake.remove();
+            });
+        }
+
+        // Initialize background snow
+        createSnowBackground();
+
+        // Initial cursor position
+        updateCursorPosition();
+
+        // Optional: Create snowflakes as the cursor moves
+        document.addEventListener('mousemove', (e) => {
+            createSnowflakeTrail(e.clientX, e.clientY);
+        });
+    </script>
+</body>
+</html>
