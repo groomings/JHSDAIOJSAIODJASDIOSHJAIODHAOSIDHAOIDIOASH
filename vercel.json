@@ -1,14 +1,6 @@
 {
   "routes": [
     {
-      "src": "/fault",
-      "dest": "/fault.html"
-    }
-  ]
-}
-{
-  "routes": [
-    {
       "src": "/versatile",
       "dest": "/versatile.html"
     }
